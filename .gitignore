@@ -1,0 +1,21 @@
+# Python and package tooling
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+build/
+dist/
+
+# Editor/platform
+.DS_Store
+.vscode/
+.idea/
+
+# Locally generated demos and experiments
+outputs/
+*.log

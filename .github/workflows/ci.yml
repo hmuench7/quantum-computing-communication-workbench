@@ -1,0 +1,26 @@
+name: Python CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.13"]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install dependencies (including Qiskit checks)
+        run: uv sync --extra dev --extra qiskit
+      - name: Tests
+        run: MPLBACKEND=Agg uv run pytest -q
+      - name: Lint
+        run: uv run ruff check src tests examples
+      - name: Build wheel and source distribution
+        run: uv build
