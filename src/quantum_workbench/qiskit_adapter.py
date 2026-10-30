@@ -34,6 +34,17 @@ def from_qiskit(qiskit_circuit: object) -> Circuit:
         qubits = tuple(qiskit_circuit.find_bit(q).index for q in item.qubits)
         clbits = tuple(qiskit_circuit.find_bit(c).index for c in item.clbits)
         name = operation.name.lower()
+        # Qiskit represents an if_test block as an IfElseOp (name="if_else").
+        # Reject structured control flow before attempting Operator(), so a
+        # student sees the actual limitation rather than a generic matrix error.
+        if name in {"if_else", "while_loop", "for_loop", "switch_case", "box"} or (
+            getattr(operation, "blocks", None) is not None
+        ):
+            raise UnsupportedOperationError(
+                f"Qiskit classical control flow {operation.name!r} is unsupported in v0.1; "
+                "conditional/loop bodies require dynamic simulation and cannot be "
+                "silently omitted"
+            )
         if getattr(operation, "condition", None) is not None:
             raise UnsupportedOperationError(
                 f"Instruction {operation.name} uses classical control (planned for v0.2+)"

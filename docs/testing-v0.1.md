@@ -46,11 +46,11 @@ uv run qworkbench run qpe --precision 3 --phase 0.3   --out-dir outputs/qpe-appr
 uv run qworkbench run qpe --precision 4 --phase 0.625 --out-dir outputs/qpe-four
 ```
 
-- [ ] Exact phase 1/8 in 3 precision bits: `001` probability ~1.
-- [ ] Phase 0.3 in 3 precision bits: main outcomes `010` (~0.578) and `011` (~0.259), with other nonzero outcomes.
-- [ ] Exact phase 0.625 in 4 precision bits: `1010` probability ~1.
-- [ ] Inspect a stage with `--step` and select the precision register with `--qubits 0 1 2` or `0 1 2 3`.
-- [ ] Examine `trace.json` step `block` labels for the inverse-QFT subcircuit. Decide what a **collapsible browser representation** should display in v0.2.
+- [X] Exact phase 1/8 in 3 precision bits: `001` probability ~1.
+- [X] Phase 0.3 in 3 precision bits: main outcomes `010` (~0.578) and `011` (~0.259), with other nonzero outcomes.
+- [X] Exact phase 0.625 in 4 precision bits: `1010` probability ~1.
+- [X] Inspect a stage with `--step` and select the precision register with `--qubits 0 1 2` or `0 1 2 3`.
+- [X] Examine `trace.json` step `block` labels for the inverse-QFT subcircuit. Decide what a **collapsible browser representation** should display in v0.2.
 
 ## E. Qiskit and custom code integration
 
@@ -61,10 +61,10 @@ uv run python examples/qiskit_interop.py
 uv run qworkbench run qpe --backend qiskit --precision 3 --phase 0.125
 ```
 
-- [ ] Qiskit-translated circuit probabilities agree with NumPy to numerical tolerance.
-- [ ] Try a Qiskit circuit using a custom `UnitaryGate` or a composed gate; report unsupported cases.
-- [ ] Try unsupported Qiskit dynamic `if_test` operations. The import should **fail clearly**, not silently omit classical control.
-- [ ] Check `--include-amplitudes` JSON is readable but potentially large.
+- [X] Qiskit-translated circuit probabilities agree with NumPy to numerical tolerance.
+- [X] Try a Qiskit circuit using a custom `UnitaryGate` or a composed gate; report unsupported cases.
+- [X] Try unsupported Qiskit dynamic `if_test` operations. The import should **fail clearly**, not silently omit classical control.
+- [X] Check `--include-amplitudes` JSON is readable but potentially large.
 
 ## F. Explicit guardrails
 
